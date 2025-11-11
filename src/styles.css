@@ -1,41 +1,176 @@
-:root { color-scheme: light dark; }
-:root[data-theme="light"] { --bg:#f7f7f8; --card:#ffffff; --fg:#111; --muted:#666; --primary:#285fe7; --border:#e6e6eb; --shadow:0 6px 24px rgba(0,0,0,.08); }
-:root[data-theme="dark"]  { --bg:#0f1115; --card:#151822; --fg:#f5f6f8; --muted:#c7c9d1; --primary:#6ea3ff; --border:#262a36; --shadow:0 6px 24px rgba(0,0,0,.5); }
+/* ================================== */
+/* 1. DEFINICIÓN DE VARIABLES (TEMAS) */
+/* ================================== */
 
-* { box-sizing: border-box; }
-html, body, #root { height: 100%; }
-body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; background: var(--bg); color: var(--fg); }
+:root {
+    /* Por defecto: Modo Claro */
+    --bg-color: #f0f2f5;       /* Fondo general muy claro */
+    --card-bg: #ffffff;      /* Fondo de la tarjeta */
+    --text-color: #333333;   /* Texto principal */
+    --heading-color: #2c3e50; /* Títulos */
+    --button-bg: #007bff;     /* Botón azul primario */
+    --button-hover: #0056b3; /* Botón azul (hover) */
+    --button-text: #ffffff;  /* Texto del botón */
+    --border-color: #e0e0e0;   /* Borde sutil */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Sombra suave */
+    --icon-color: #f39c12;   /* Color del icono (Sol) */
+}
 
-.container { max-width: 1000px; margin: 0 auto; padding: 24px; }
+/* Define las variables del Modo Oscuro.
+  Esto se activará AUTOMÁTICAMENTE si el sistema operativo del usuario está en modo oscuro.
+*/
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #121212;       /* Fondo oscuro (casi negro) */
+        --card-bg: #1e1e1e;       /* Tarjeta en gris oscuro */
+        --text-color: #e0e0e0;   /* Texto claro */
+        --heading-color: #ffffff; /* Títulos blancos */
+        --button-bg: #4a5a9c;     /* Azul/púrpura del modo oscuro */
+        --button-hover: #5e6db3; /* Azul/púrpura (hover) */
+        --button-text: #ffffff;  /* Texto del botón */
+        --border-color: #3a3a3a;   /* Borde oscuro */
+        --shadow-color: rgba(0, 0, 0, 0.4); /* Sombra (más sutil en oscuro) */
+        --icon-color: #8a9ffc;   /* Color del icono (Luna) */
+    }
+}
 
-.screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: var(--shadow); }
-.screen + .screen { margin-top: 16px; }
+/* Clase MANUAL para forzar el modo oscuro.
+  Puedes usar JavaScript para añadir o quitar esta clase del <body>.
+  Sobrescribe las variables :root y @media.
+*/
+body.dark-mode {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-color: #e0e0e0;
+    --heading-color: #ffffff;
+    --button-bg: #4a5a9c;
+    --button-hover: #5e6db3;
+    --button-text: #ffffff;
+    --border-color: #3a3a3a;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --icon-color: #8a9ffc;
+}
 
-h1, h2, h3 { margin: 0 0 12px; color: var(--fg) }
-p { margin: 8px 0 0; color: var(--muted); }
 
-.actions { margin-top: 16px; display: flex; gap: 8px; }
-.btn { border:1px solid var(--border); background: transparent; color: var(--fg); padding: 10px 14px; border-radius: 10px; cursor: pointer; }
-.btn.primary { background: var(--primary); color: white; border-color: transparent; }
+/* ================================== */
+/* 2. ESTILOS GENERALES DE LA PÁGINA  */
+/* ================================== */
+/* Estos estilos usan las variables de arriba */
 
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 12px; }
-.card { text-align: left; background: var(--card); border:1px solid var(--border); padding:16px; border-radius: 12px; cursor: pointer; box-shadow: var(--shadow); }
-.card h3{ margin: 0 0 6px; }
-.card p{ margin: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px; /* Añade padding para que no se pegue a los bordes en móvil */
+    box-sizing: border-box;
+    /* Transición suave para los cambios de modo */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-.theme-toggle-btn { position: fixed; right: 16px; top: 16px; border-radius: 999px; border:1px solid var(--border); background: var(--card); padding: 8px 10px; cursor: pointer; box-shadow: var(--shadow); }
-.theme-toggle-btn .icon-moon { margin-left: 8px; }
+.container {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    /* Sombra más pronunciada */
+    box-shadow: 0 8px 25px var(--shadow-color);
+    padding: 30px 40px;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid var(--border-color);
+    /* Transición suave para los cambios de modo */
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-.filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin: 16px 0; }
-.filters input { padding: 10px 12px; border-radius: 10px; border:1px solid var(--border); background: transparent; color: var(--fg); }
+h2 {
+    color: var(--heading-color);
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: clamp(1.5em, 5vw, 1.8em); /* Tamaño de fuente adaptable */
+    font-weight: 600;
+}
 
-.results { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-.result-item { border:1px solid var(--border); border-radius: 12px; padding: 12px; background: var(--card); cursor: pointer; }
-.result-item .row { display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px; }
-.empty { color: var(--muted); padding: 12px; border: 1px dashed var(--border); border-radius: 12px; text-align: center; }
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: grid; place-items: center; padding: 16px; }
-.modal-content { width: min(720px, 100%); background: var(--card); color: var(--fg); border:1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); position: relative; }
-.modal-close { position: absolute; right: 10px; top: 10px; border: 0; background: transparent; font-size: 22px; color: var(--muted); cursor: pointer; }
-.modal-detalles p { margin: 6px 0; }
-.list { margin: 6px 0 0 18px; }
+.button-group button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 8px;
+    padding: 14px 25px;
+    font-size: 1.05em;
+    font-weight: 500;
+    cursor: pointer;
+    /* Transiciones para hover */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.button-group button:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-2px); /* Efecto "lift" */
+}
+
+.button-group button:active {
+    transform: translateY(0); /* Efecto "press" */
+}
+
+/* ================================== */
+/* 3. ICONO PARA CAMBIAR MODO       */
+/* ================================== */
+
+/* Asumiendo que tienes un botón o icono con la clase .mode-toggle 
+  para cambiar manualmente el tema.
+*/
+.mode-toggle {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.8em; /* Tamaño del icono (puedes usar 30px) */
+    color: var(--icon-color);
+    padding: 0;
+    line-height: 1;
+    /* Transición para el color y rotación */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.mode-toggle:hover {
+    transform: scale(1.1) rotate(10deg);
+}
+
+
+/* ================================== */
+/* 4. MEJORAS RESPONSIVE            */
+/* ================================== */
+
+/* En pantallas más grandes (como tablets o PC), 
+  pone los botones "Notas" y "Modo Admin" uno al lado del otro.
+*/
+@media (min-width: 600px) {
+    .button-group {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* El primer botón ("Datos de Alumnos") ocupa todo el ancho */
+    .button-group button:first-child {
+        flex-basis: 100%;
+        margin-bottom: 5px; /* Pequeña separación */
+    }
+
+    /* Los otros botones comparten el espacio */
+    .button-group button {
+        flex: 1 1 150px; /* Crecen, decrecen, base de 150px */
+    }
+}
