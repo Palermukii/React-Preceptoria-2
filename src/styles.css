@@ -11,7 +11,7 @@
 :root[data-theme="light"] {
   --bg:#eef1f3;
   --card:#ffffff;
-  --fg:#111;
+  --fg:#111; /* Texto negro en modo claro */
   --muted:#666;
   --primary:#3497ff;
   --primary-hover:#1f7ce4;
@@ -24,7 +24,7 @@
 :root[data-theme="dark"]  {
   --bg:#0c0f14;
   --card:#151922;
-  --fg:#e9ecf3;
+  --fg:#ffffff; /* 🔹 Texto blanco en modo oscuro */
   --muted:#b4b6c2;
   --primary:#5fa1ff;
   --primary-hover:#84b8ff;
@@ -41,6 +41,7 @@
 html, body, #root {
   height: 100%;
   background: var(--bg);
+  color: var(--fg); /* 🔹 Asegura color global */
   transition: background var(--transition), color var(--transition);
 }
 
@@ -68,6 +69,7 @@ body {
   border-radius: var(--radius);
   padding: 30px;
   box-shadow: var(--shadow);
+  color: var(--fg); /* 🔹 Asegura color dentro de tarjetas */
   transition: var(--transition);
 }
 
@@ -78,7 +80,7 @@ body {
 /* Headers */
 h1, h2, h3 {
   margin: 0 0 14px;
-  color: var(--fg);
+  color: var(--fg); /* 🔹 Texto usa variable */
   text-align: center;
   font-weight: 600;
   letter-spacing: .4px;
@@ -97,7 +99,7 @@ h1, h2, h3 {
 .btn {
   border: 1px solid var(--border);
   background: transparent;
-  color: var(--fg);
+  color: var(--fg); /* 🔹 Texto adaptable */
   padding: 13px 16px;
   border-radius: 12px;
   cursor: pointer;
@@ -138,6 +140,7 @@ h1, h2, h3 {
   padding: 18px;
   border-radius: var(--radius);
   cursor: pointer;
+  color: var(--fg); /* 🔹 Texto adaptable */
   box-shadow: var(--shadow);
   transition: var(--transition);
 }
@@ -157,6 +160,7 @@ h1, h2, h3 {
   border-radius: 999px;
   border:1px solid var(--border);
   background: var(--card);
+  color: var(--fg); /* 🔹 Texto visible según tema */
   padding: 8px 12px;
   cursor: pointer;
   box-shadow: var(--shadow);
@@ -182,7 +186,7 @@ h1, h2, h3 {
   border-radius: 12px;
   border: 1px solid var(--border);
   background: transparent;
-  color: var(--fg);
+  color: var(--fg); /* 🔹 Texto visible */
   transition: var(--transition);
 }
 
@@ -209,6 +213,7 @@ h1, h2, h3 {
   border-radius: var(--radius);
   padding: 14px;
   background: var(--card);
+  color: var(--fg); /* 🔹 Texto adaptable */
   cursor: pointer;
   transition: var(--transition);
 }
@@ -249,7 +254,7 @@ h1, h2, h3 {
 .modal-content {
   width: min(720px, 100%);
   background: var(--card);
-  color: var(--fg);
+  color: var(--fg); /* 🔹 Texto adaptable */
   border:1px solid var(--border);
   border-radius: var(--radius);
   padding: 24px;
@@ -271,6 +276,7 @@ h1, h2, h3 {
 
 .modal-detalles p {
   margin: 6px 0;
+  color: var(--fg);
 }
 
 /* list inside modal */
