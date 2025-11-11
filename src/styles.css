@@ -43,13 +43,10 @@ html, body, #root {
   background: var(--bg);
   color: var(--fg);
   transition: background var(--transition), color var(--transition);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 body {
-  margin: 0;
+  margin:0;
   font-family: system-ui, "Segoe UI", Roboto;
   color: var(--fg);
 }
@@ -58,15 +55,9 @@ body {
    LAYOUT
    =============================================== */
 .container {
-  width: 100%;
-  max-width: 880px; /* 🔹 Más compacto */
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
+  padding: 28px 20px;
 }
 
 /* ===============================================
@@ -76,15 +67,15 @@ body {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 26px;
+  padding: 24px 26px;
   box-shadow: var(--shadow);
   color: var(--fg);
-  width: 100%;
   transition: var(--transition);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  gap: 16px; /* 🔹 contenido más equilibrado */
 }
 
 .screen:hover {
@@ -93,7 +84,7 @@ body {
 
 /* Headers */
 h1, h2, h3 {
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   color: var(--fg);
   text-align: center;
   font-weight: 600;
@@ -104,7 +95,7 @@ h1, h2, h3 {
    BUTTONS
    =============================================== */
 .actions {
-  margin-top: 18px;
+  margin-top: 16px;
   display: flex;
   gap: 10px;
   justify-content: center;
@@ -115,7 +106,7 @@ h1, h2, h3 {
   border: 1px solid var(--border);
   background: transparent;
   color: var(--fg);
-  padding: 12px 16px;
+  padding: 12px 18px;
   border-radius: 12px;
   cursor: pointer;
   font-weight: 500;
@@ -144,24 +135,26 @@ h1, h2, h3 {
    =============================================== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* 🔹 Más equilibrado */
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 14px;
   margin-top: 16px;
-  width: 100%;
-  justify-items: center;
 }
 
 .card {
-  text-align: center;
+  text-align: center; /* 🔹 centrado interno */
   background: var(--card);
   border: 1px solid var(--border);
-  padding: 16px;
+  padding: 20px 18px; /* 🔹 más compacto */
   border-radius: var(--radius);
   cursor: pointer;
   color: var(--fg);
   box-shadow: var(--shadow);
   transition: var(--transition);
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .card:hover {
@@ -174,8 +167,8 @@ h1, h2, h3 {
    =============================================== */
 .theme-toggle-btn {
   position: fixed;
-  right: 16px;
-  top: 16px;
+  right: 18px;
+  top: 18px;
   border-radius: 999px;
   border:1px solid var(--border);
   background: var(--card);
@@ -184,7 +177,6 @@ h1, h2, h3 {
   cursor: pointer;
   box-shadow: var(--shadow);
   transition: var(--transition);
-  z-index: 10;
 }
 
 .theme-toggle-btn:hover {
@@ -198,19 +190,20 @@ h1, h2, h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center;
-  width: 100%;
-  margin: 12px 0;
+  justify-content: center; /* 🔹 centrado horizontal */
+  margin: 16px 0;
 }
 
 .filters input {
-  padding: 10px 14px;
+  padding: 12px 14px;
   border-radius: 12px;
   border: 1px solid var(--border);
   background: transparent;
   color: var(--fg);
   transition: var(--transition);
   text-align: center;
+  width: 100%;
+  max-width: 240px;
 }
 
 .filters input:focus {
@@ -225,25 +218,29 @@ h1, h2, h3 {
 .results {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
 }
 
 .result-item {
   border:1px solid var(--border);
   border-radius: var(--radius);
-  padding: 12px;
+  padding: 16px 18px;
   background: var(--card);
   color: var(--fg);
   cursor: pointer;
   transition: var(--transition);
   width: 100%;
-  max-width: 640px; /* 🔹 Centra los resultados */
+  max-width: 640px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
 .result-item:hover {
@@ -261,7 +258,7 @@ h1, h2, h3 {
 
 .empty {
   color: var(--muted);
-  padding: 10px;
+  padding: 12px;
   border: 1px dashed var(--border);
   border-radius: var(--radius);
   text-align: center;
@@ -281,22 +278,26 @@ h1, h2, h3 {
 }
 
 .modal-content {
-  width: min(640px, 95%);
+  width: min(720px, 95%);
   background: var(--card);
   color: var(--fg);
   border:1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 24px;
   box-shadow: var(--shadow);
   position: relative;
   animation: slideUp .28s ease;
-  text-align: center;
+  text-align: center; /* 🔹 centrado interno */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .modal-close {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 12px;
+  top: 12px;
   border: 0;
   background: transparent;
   font-size: 22px;
@@ -305,19 +306,19 @@ h1, h2, h3 {
 }
 
 .modal-detalles p {
-  margin: 6px 0;
+  margin: 4px 0;
   color: var(--fg);
+  text-align: center;
 }
 
+/* list inside modal */
 .list {
   margin: 6px 0 0 18px;
   color: var(--muted);
   text-align: left;
 }
 
-/* ===============================================
-   ANIMATIONS
-   =============================================== */
+/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
