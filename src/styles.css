@@ -1,177 +1,279 @@
-/* ================================================= */
-/* =========== 1. VARIABLES (TEMAS) =================*/
-/* ================================================= */
-
-:root {
-    /* ===== MODO CLARO ===== */
-    --bg-color: #eef2f5;
-    --card-bg: rgba(255, 255, 255, 0.78);
-    --text-color: #222;
-    --heading-color: #1d3557;
-    --button-bg: #40a9ff;
-    --button-hover: #1e90ff;
-    --button-text: #ffffff;
-    --border-color: rgba(120,120,120,0.15);
-    --shadow-color: rgba(0, 0, 0, 0.15);
-    --icon-color: #f7b731;
-}
-
-/* ===== MODO OSCURO AUTOMÁTICO ===== */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-color: #0f0f14;
-        --card-bg: rgba(18, 18, 18, 0.65);
-        --text-color: #f1f1f1;
-        --heading-color: #e0e6ff;
-        --button-bg: #3a5bff;
-        --button-hover: #5673ff;
-        --button-text: #ffffff;
-        --border-color: rgba(255,255,255,0.1);
-        --shadow-color: rgba(0, 0, 0, 0.55);
-        --icon-color: #8cb6ff;
-    }
-}
-
-/* ===== CLASE PARA MODO OSCURO MANUAL ===== */
-body.dark-mode {
-    --bg-color: #0d0e12;
-    --card-bg: rgba(20, 20, 20, 0.65);
-    --text-color: #ececec;
-    --heading-color: #ffffff;
-    --button-bg: #465bff;
-    --button-hover: #6e7dff;
-    --button-text: #ffffff;
-    --border-color: rgba(255,255,255,0.15);
-    --shadow-color: rgba(0, 0, 0, 0.65);
-    --icon-color: #8cb6ff;
-}
-
-
-/* ================================================= */
-/* =========== 2. ESTILOS GENERALES ================*/
-/* ================================================= */
-
+/* ===========================
+   Reset + Valores base
+   =========================== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; }
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg-color);
-    color: var(--text-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    transition: background-color .35s ease, color .35s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.45;
+  background: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  transition: background-color .36s ease, color .36s ease;
 }
 
-/* ==== EFECTO GLASSMORPHISM ===== */
-.container {
-    background: var(--card-bg);
-    backdrop-filter: blur(14px);
-    border-radius: 22px;
-    padding: 45px 50px;
-    width: min(90%, 700px);
-    border: 1px solid var(--border-color);
-
-    box-shadow: 0 0 35px var(--shadow-color),
-                inset 0 0 20px rgba(255,255,255,0.05);
-
-    text-align: center;
-    animation: fadeIn 0.4s ease;
-    transition: background-color .3s ease, box-shadow .3s ease;
+/* =================================================
+   1) Variables (tema claro / oscuro) - usar solo variables
+   ================================================= */
+:root{
+  /* CLARO por defecto */
+  --bg-color: #f3f6f8;
+  --panel-bg: rgba(255,255,255,0.85);
+  --text-color: #202427;
+  --muted: #55606a;
+  --accent: #3fa9ff;       /* azul botones */
+  --accent-strong: #1f8efc;
+  --card-border: rgba(0,0,0,0.06);
+  --shadow: 0 10px 30px rgba(12,20,30,0.08);
+  --glow: rgba(63,169,255,0.08);
+  --icon-color: #f1b330;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(.97); }
-    to { opacity: 1; transform: scale(1); }
+/* Prefers dark scheme (automático) */
+@media (prefers-color-scheme: dark) {
+  :root{
+    --bg-color: #0c0f12;
+    --panel-bg: rgba(16,20,26,0.7);
+    --text-color: #e8eef8;
+    --muted: #aab6d3;
+    --accent: #3a5bff;
+    --accent-strong: #5673ff;
+    --card-border: rgba(255,255,255,0.06);
+    --shadow: 0 18px 50px rgba(1,6,12,0.6);
+    --glow: rgba(60,100,200,0.12);
+    --icon-color: #9eb8ff;
+  }
 }
 
-h2 {
-    color: var(--heading-color);
-    margin-bottom: 35px;
-    font-size: clamp(1.7rem, 4vw, 2rem);
-    letter-spacing: 0.5px;
-    text-shadow: 0 0 9px rgba(100, 160, 255, 0.45);
+/* Clase manual para forzar modo oscuro si la añades al body */
+body.dark-mode {
+  --bg-color: #0c0f12;
+  --panel-bg: rgba(16,20,26,0.78);
+  --text-color: #eef2f8;
+  --muted: #99a8d7;
+  --accent: #3a5bff;
+  --accent-strong: #5673ff;
+  --card-border: rgba(255,255,255,0.06);
+  --shadow: 0 18px 50px rgba(1,6,12,0.6);
+  --glow: rgba(60,100,200,0.12);
+  --icon-color: #9eb8ff;
 }
 
-
-/* ================================================= */
-/* =========== 3. BOTONES ===========================*/
-/* ================================================= */
-
-.button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+/* =================================================
+   2) Contenedor principal (bien responsivo)
+   ================================================= */
+.container{
+  width: min(94%, 900px);
+  max-width: 920px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 18px;
+  padding: 48px 56px;
+  text-align: center;
+  border: 1px solid var(--card-border);
+  box-shadow:
+    0 6px 30px rgba(2,6,12,0.25),
+    0 0 60px var(--glow);
+  backdrop-filter: blur(10px);
+  transition: transform .28s ease, box-shadow .28s ease, background .28s ease;
+  background-color: var(--panel-bg);
 }
 
-.button-group button {
-    background: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 14px;
-    padding: 15px 28px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: .6px;
-    cursor: pointer;
-
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-
-    transition: background-color .2s ease,
-                transform .2s ease,
-                box-shadow .25s ease;
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px){
+  .container { padding: 28px 20px; border-radius: 12px; }
 }
 
-.button-group button:hover {
-    background: var(--button-hover);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+/* Título principal */
+.container h2{
+  font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+  color: var(--text-color);
+  margin-bottom: 12px;
+  font-weight: 700;
+  text-shadow: 0 0 14px rgba(0,0,0,0.06);
 }
 
-.button-group button:active {
-    transform: scale(.98);
+/* Subtítulo / descripción pequeña */
+.container p {
+  color: var(--muted);
+  margin-bottom: 22px;
+  font-size: 0.95rem;
 }
 
-
-
-/* ================================================= */
-/* =========== 4. ICONO (SOL/LUNA) ================= */
-/* ================================================= */
-
-.mode-toggle {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 1.9rem;
-    color: var(--icon-color);
-
-    transition: transform .25s ease, color .35s ease;
+/* =================================================
+   3) Grupo de botones
+   ================================================= */
+.button-group{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  margin-top: 8px;
 }
 
-.mode-toggle:hover {
-    transform: scale(1.15) rotate(12deg);
+/* Estilo general botones (mantener compatibilidad con etiquetas <button>) */
+.button-group button,
+button.primary,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+  color: var(--button-text, #fff);
+  border: none;
+  padding: 12px 26px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.02rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(6,18,40,0.14);
+  transition: transform .18s ease, box-shadow .22s ease, filter .18s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-
-/* ================================================= */
-/* =========== 5. RESPONSIVE ========================*/
-/* ================================================= */
-
-@media (min-width: 600px) {
-    .button-group {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .button-group button:first-child {
-        flex-basis: 100%;
-    }
-
-    .button-group button {
-        flex: 1 1 180px;
-    }
+/* hover / focus */
+.button-group button:hover,
+button.primary:hover, .btn:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.02);
+  box-shadow: 0 10px 30px rgba(6,18,40,0.22);
 }
+.button-group button:active,
+button.primary:active, .btn:active {
+  transform: translateY(-1px) scale(.995);
+}
+
+/* En pantallas grandes, hacer layout: primer botón full, los otros al lado */
+@media (min-width: 620px) {
+  .button-group { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 18px; }
+  .button-group button:first-child { flex-basis: 100%; max-width: 100%; }
+  .button-group button { flex: 1 1 200px; min-width: 160px; }
+}
+
+/* Si necesitas un botón secundario estilo más pequeño */
+.button-small {
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 500;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--card-border);
+  box-shadow: none;
+}
+
+/* =================================================
+   4) Toggle del tema (sol / luna)
+   ================================================= */
+.mode-toggle{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.05));
+  color: var(--icon-color);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1200;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  transition: transform .18s ease, background .25s ease, color .25s;
+  backdrop-filter: blur(6px);
+  padding: 6px;
+}
+.mode-toggle:hover { transform: scale(1.06) rotate(6deg); }
+
+/* Si tu toggle incluye un <img> o emoji, lo centrá */
+.mode-toggle img,
+.mode-toggle svg { width: 26px; height: 26px; pointer-events: none; }
+
+/* =================================================
+   5) Modal básico (por si usás ModalAlumno)
+   ================================================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  background: rgba(5,8,12,0.45);
+  padding: 24px;
+}
+.modal .modal-content {
+  width: min(96%, 780px);
+  background: var(--panel-bg);
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 30px 80px rgba(2,6,12,0.7);
+  max-height: 90vh;
+  overflow: auto;
+}
+.modal .modal-header {
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+}
+.modal .close-btn {
+  background: transparent;
+  border: 1px solid var(--card-border);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.modal .modal-body { margin-top: 12px; color: var(--text-color); }
+
+/* =================================================
+   6) Tablas / listas (ContentScreen)
+   ================================================= */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: .95rem;
+  color: var(--text-color);
+}
+.table thead th {
+  text-align: left;
+  padding: 10px 12px;
+  font-weight: 700;
+  color: var(--muted);
+  border-bottom: 1px dashed var(--card-border);
+}
+.table tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+
+/* =================================================
+   7) Accesibilidad / focus visible
+   ================================================= */
+button:focus, .mode-toggle:focus, .close-btn:focus {
+  outline: 3px solid rgba(63,169,255,0.18);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* =================================================
+   8) Pequeños ajustes y utilidades
+   ================================================= */
+.center-row { display:flex; align-items:center; justify-content:center; gap:12px; }
+.small { font-size: .88rem; color: var(--muted); }
+.kicker { font-weight: 600; color: var(--muted); font-size: .95rem; }
+
+/* =================================================
+   9) Animaciones suaves al entrar
+   ================================================= */
+@keyframes slideUpFade {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+.container, .modal .modal-content { animation: slideUpFade .32s cubic-bezier(.2,.9,.2,1); }
