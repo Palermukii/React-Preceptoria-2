@@ -75,7 +75,7 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 16px; /* 🔹 contenido más equilibrado */
+  gap: 16px;
 }
 
 .screen:hover {
@@ -141,10 +141,10 @@ h1, h2, h3 {
 }
 
 .card {
-  text-align: center; /* 🔹 centrado interno */
+  text-align: center;
   background: var(--card);
   border: 1px solid var(--border);
-  padding: 20px 18px; /* 🔹 más compacto */
+  padding: 20px 18px;
   border-radius: var(--radius);
   cursor: pointer;
   color: var(--fg);
@@ -187,11 +187,11 @@ h1, h2, h3 {
    FILTERS / INPUTS
    =============================================== */
 .filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center; /* 🔹 centrado horizontal */
-  margin: 16px 0;
+  display: grid; /* 🔹 De nuevo como antes: en línea */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+  width: 100%;
 }
 
 .filters input {
@@ -203,7 +203,6 @@ h1, h2, h3 {
   transition: var(--transition);
   text-align: center;
   width: 100%;
-  max-width: 240px;
 }
 
 .filters input:focus {
@@ -287,7 +286,7 @@ h1, h2, h3 {
   box-shadow: var(--shadow);
   position: relative;
   animation: slideUp .28s ease;
-  text-align: center; /* 🔹 centrado interno */
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
