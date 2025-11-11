@@ -11,7 +11,7 @@
 :root[data-theme="light"] {
   --bg:#eef1f3;
   --card:#ffffff;
-  --fg:#111; /* Texto negro en modo claro */
+  --fg:#111;
   --muted:#666;
   --primary:#3497ff;
   --primary-hover:#1f7ce4;
@@ -24,7 +24,7 @@
 :root[data-theme="dark"]  {
   --bg:#0c0f14;
   --card:#151922;
-  --fg:#ffffff; /* 🔹 Texto blanco en modo oscuro */
+  --fg:#ffffff;
   --muted:#b4b6c2;
   --primary:#5fa1ff;
   --primary-hover:#84b8ff;
@@ -41,12 +41,15 @@
 html, body, #root {
   height: 100%;
   background: var(--bg);
-  color: var(--fg); /* 🔹 Asegura color global */
+  color: var(--fg);
   transition: background var(--transition), color var(--transition);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 body {
-  margin:0;
+  margin: 0;
   font-family: system-ui, "Segoe UI", Roboto;
   color: var(--fg);
 }
@@ -55,9 +58,15 @@ body {
    LAYOUT
    =============================================== */
 .container {
-  max-width: 1050px;
+  width: 100%;
+  max-width: 880px; /* 🔹 Más compacto */
   margin: 0 auto;
-  padding: 32px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
 }
 
 /* ===============================================
@@ -67,10 +76,15 @@ body {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 30px;
+  padding: 26px;
   box-shadow: var(--shadow);
-  color: var(--fg); /* 🔹 Asegura color dentro de tarjetas */
+  color: var(--fg);
+  width: 100%;
   transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .screen:hover {
@@ -79,8 +93,8 @@ body {
 
 /* Headers */
 h1, h2, h3 {
-  margin: 0 0 14px;
-  color: var(--fg); /* 🔹 Texto usa variable */
+  margin: 0 0 12px;
+  color: var(--fg);
   text-align: center;
   font-weight: 600;
   letter-spacing: .4px;
@@ -90,22 +104,24 @@ h1, h2, h3 {
    BUTTONS
    =============================================== */
 .actions {
-  margin-top: 22px;
+  margin-top: 18px;
   display: flex;
-  gap: 12px;
+  gap: 10px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .btn {
   border: 1px solid var(--border);
   background: transparent;
-  color: var(--fg); /* 🔹 Texto adaptable */
-  padding: 13px 16px;
+  color: var(--fg);
+  padding: 12px 16px;
   border-radius: 12px;
   cursor: pointer;
   font-weight: 500;
   transition: var(--transition);
   box-shadow: var(--shadow);
+  text-align: center;
 }
 
 .btn:hover {
@@ -128,21 +144,24 @@ h1, h2, h3 {
    =============================================== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
-  margin-top: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* 🔹 Más equilibrado */
+  gap: 14px;
+  margin-top: 16px;
+  width: 100%;
+  justify-items: center;
 }
 
 .card {
-  text-align: left;
+  text-align: center;
   background: var(--card);
   border: 1px solid var(--border);
-  padding: 18px;
+  padding: 16px;
   border-radius: var(--radius);
   cursor: pointer;
-  color: var(--fg); /* 🔹 Texto adaptable */
+  color: var(--fg);
   box-shadow: var(--shadow);
   transition: var(--transition);
+  width: 100%;
 }
 
 .card:hover {
@@ -155,16 +174,17 @@ h1, h2, h3 {
    =============================================== */
 .theme-toggle-btn {
   position: fixed;
-  right: 18px;
-  top: 18px;
+  right: 16px;
+  top: 16px;
   border-radius: 999px;
   border:1px solid var(--border);
   background: var(--card);
-  color: var(--fg); /* 🔹 Texto visible según tema */
+  color: var(--fg);
   padding: 8px 12px;
   cursor: pointer;
   box-shadow: var(--shadow);
   transition: var(--transition);
+  z-index: 10;
 }
 
 .theme-toggle-btn:hover {
@@ -175,19 +195,22 @@ h1, h2, h3 {
    FILTERS / INPUTS
    =============================================== */
 .filters {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
-  margin: 18px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+  margin: 12px 0;
 }
 
 .filters input {
-  padding: 12px 14px;
+  padding: 10px 14px;
   border-radius: 12px;
   border: 1px solid var(--border);
   background: transparent;
-  color: var(--fg); /* 🔹 Texto visible */
+  color: var(--fg);
   transition: var(--transition);
+  text-align: center;
 }
 
 .filters input:focus {
@@ -205,34 +228,40 @@ h1, h2, h3 {
   margin: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
+  width: 100%;
 }
 
 .result-item {
   border:1px solid var(--border);
   border-radius: var(--radius);
-  padding: 14px;
+  padding: 12px;
   background: var(--card);
-  color: var(--fg); /* 🔹 Texto adaptable */
+  color: var(--fg);
   cursor: pointer;
   transition: var(--transition);
+  width: 100%;
+  max-width: 640px; /* 🔹 Centra los resultados */
+  text-align: center;
 }
 
 .result-item:hover {
-  transform: translateX(4px);
+  transform: translateY(-2px);
   box-shadow: var(--glow);
 }
 
 .result-item .row {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: wrap;
   font-size: 14px;
+  justify-content: center;
 }
 
 .empty {
   color: var(--muted);
-  padding: 12px;
+  padding: 10px;
   border: 1px dashed var(--border);
   border-radius: var(--radius);
   text-align: center;
@@ -252,21 +281,22 @@ h1, h2, h3 {
 }
 
 .modal-content {
-  width: min(720px, 100%);
+  width: min(640px, 95%);
   background: var(--card);
-  color: var(--fg); /* 🔹 Texto adaptable */
+  color: var(--fg);
   border:1px solid var(--border);
   border-radius: var(--radius);
-  padding: 24px;
+  padding: 20px;
   box-shadow: var(--shadow);
   position: relative;
   animation: slideUp .28s ease;
+  text-align: center;
 }
 
 .modal-close {
   position: absolute;
-  right: 12px;
-  top: 12px;
+  right: 10px;
+  top: 10px;
   border: 0;
   background: transparent;
   font-size: 22px;
@@ -279,13 +309,15 @@ h1, h2, h3 {
   color: var(--fg);
 }
 
-/* list inside modal */
 .list {
   margin: 6px 0 0 18px;
   color: var(--muted);
+  text-align: left;
 }
 
-/* Animations */
+/* ===============================================
+   ANIMATIONS
+   =============================================== */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
